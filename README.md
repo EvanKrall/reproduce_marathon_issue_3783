@@ -24,3 +24,8 @@ docker-compose run --rm behave tox -e inside_container -- --no-capture
 We use [behave](http://pythonhosted.org/behave/) to encode the reproduction case.
 You can see the overall structure of the test in `behave/issue_3783.feature`.
 The details of how each step is implemented are in `behave/steps/marathon_steps.py`.
+
+
+## Credits
+
+A lot of this code was adapted from [Yelp/paasta](https://github.com/Yelp/paasta)'s integration test suite.
