@@ -50,13 +50,6 @@ def marathon_app_for_marathon_to_start(context):
             # cause a failover.
             constraints=[["hostname", "UNIQUE"]],
             instances=2,
-            health_checks=[
-                marathon.models.MarathonHealthCheck(
-                    protocol="COMMAND",
-                    command={"value": "/bin/true"},
-                    gracePeriodSeconds=300,
-                )
-            ]
         ),
     )
 
