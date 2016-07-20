@@ -16,6 +16,13 @@ def wait_for_marathon(context):
 def delete_existing_apps(context):
     for app in context.client.list_apps():
         context.client.delete_app(app.id, force=True)
+    # app deletes seem to be asynchronous, creating an app with the same name
+    # as a previous app will fail unless the deploy for deleting it has
+    # finished.
+    time.sleep(0.5)
+    while context.client.list_deployments():
+        print "There are still marathon deployments in progress. sleeping."
+        time.sleep(0.5)
 
 
 @given('a running marathon instance')
@@ -56,7 +63,7 @@ def marathon_app_for_marathon_to_start(context):
 
 @when('we wait for one of the instances to start')
 def wait_for_one_instance_to_start(context):
-    for _ in xrange(5):
+    for _ in xrange(60):
         app = context.client.get_app('app-id', embed_tasks=True)
         if app.tasks_running >= 1:
             context.task_ids_before_failover = set([t.id for t in app.tasks])
@@ -75,7 +82,7 @@ def cause_a_leadership_failover(context):
 def marathon_should_not_kill_anything(context):
     app = context.client.get_app('app-id', embed_tasks=True)
     # Check for a little while, in case the effect is delayed.
-    for _ in xrange(30):
+    for _ in xrange(10):
         task_ids = set([t.id for t in app.tasks])
-        assert context.task_ids_before_failover.issubset(task_ids)
+        assert context.task_ids_before_failover == task_ids
         time.sleep(1)

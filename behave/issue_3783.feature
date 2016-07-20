@@ -5,3 +5,15 @@ Feature: Marathon
      When we wait for one of the instances to start
       And we cause a leadership failover
      Then marathon should not kill anything
+     When we cause a leadership failover
+     Then marathon should not kill anything
+     When we cause a leadership failover
+     Then marathon should not kill anything
+     When we cause a leadership failover
+     Then marathon should not kill anything
+     When we cause a leadership failover
+     Then marathon should not kill anything
+     When we cause a leadership failover
+     Then marathon should not kill anything
+     When we cause a leadership failover
+     Then marathon should not kill anything
