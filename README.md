@@ -1,5 +1,7 @@
 # Reproduction of [Marathon issue 3783](https://github.com/mesosphere/marathon/issues/3783)
 
+Is the bug fixed yet?: [![Build Status](https://travis-ci.org/EvanKrall/reproduce_marathon_issue_3783.svg?branch=master)](https://travis-ci.org/EvanKrall/reproduce_marathon_issue_3783)
+
 This repo reproduces mesosphere/marathon#3783.
 
 The conditions of failure seem to be:
