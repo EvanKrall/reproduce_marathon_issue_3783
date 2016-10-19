@@ -77,5 +77,5 @@ def marathon_should_not_kill_anything(context):
     # Check for a little while, in case the effect is delayed.
     for _ in xrange(10):
         task_ids = set([t.id for t in app.tasks])
-        assert context.task_ids_before_failover == task_ids
+        assert context.task_ids_before_failover == task_ids, (context.task_ids_before_failover, task_ids)
         time.sleep(1)
