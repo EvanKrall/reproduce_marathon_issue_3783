@@ -16,7 +16,7 @@ FROM ubuntu:trusty
 RUN echo "deb http://repos.mesosphere.com/ubuntu trusty main" > /etc/apt/sources.list.d/mesosphere.list
 RUN echo "deb http://repos.mesosphere.com/ubuntu trusty-testing main" > /etc/apt/sources.list.d/mesosphere-testing.list
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv 81026D0004C44CF7EF55ADF8DF7D54CBE56151BF
-RUN apt-get update && apt-get -y install mesos=1.0.0-1.0.73.rc2.ubuntu1404
+RUN apt-get update && apt-get -y install mesos=1.0.1-2.0.93.ubuntu1404
 
 # Install Java 8 PPA
 RUN apt-get install -y software-properties-common
@@ -26,6 +26,6 @@ RUN echo "debconf shared/accepted-oracle-license-v1-1 select true" | debconf-set
 RUN echo "debconf shared/accepted-oracle-license-v1-1 seen true" | debconf-set-selections
 RUN apt-get update && apt-get -y install lsb-release oracle-java8-installer
 
-RUN apt-get -y install libsasl2-modules marathon=1.2.0-1.0.486.ubuntu1404
+RUN apt-get -y install libsasl2-modules marathon=1.3.3-1.0.529.ubuntu1404
 
 EXPOSE 8080
