@@ -1,8 +1,7 @@
 #!/bin/bash
 $*
 ret=$?
-if [[ $ret -ne 0 ]]; then
-  docker-compose stop
-  docker-compose logs
-fi
+docker-compose stop -t 60
+sleep 30s
+docker-compose logs &
 exit $ret

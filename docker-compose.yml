@@ -24,7 +24,7 @@ mesosslave:
     - /var/run/docker.sock:/var/run/docker.sock
 
 marathon:
-  image: mesosphere/marathon:v1.4.0-snap17
+  image: mesosphere/marathon:MARATHON_VERSION
   ports:
     - 8080
   links:
