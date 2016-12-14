@@ -7,8 +7,6 @@ install: pip install tox
 script: sed -i "s/MARATHON_VERSION/${MARATHON_VERSION}/g" docker-compose.yml && tox
 env:
   - MARATHON_VERSION: latest-dev
-  - MARATHON_VERSION: v1.4.0-snap24
+  - MARATHON_VERSION: v1.4.0-RC3
   - MARATHON_VERSION: v1.4.0-snap17
   - MARATHON_VERSION: v1.3.6
-  - MARATHON_VERSION: v1.3.3
-  - MARATHON_VERSION: v1.3.2
