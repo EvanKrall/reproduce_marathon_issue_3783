@@ -1,9 +1,11 @@
 zookeeper:
   build: dockerfiles/zookeeper/
+  stop_signal: SIGKILL
   ports:
     - 2181
 mesosmaster:
   build: dockerfiles/mesos/
+  stop_signal: SIGKILL
   ports:
     - 5050
   links:
@@ -12,6 +14,7 @@ mesosmaster:
 
 mesosslave:
   build: dockerfiles/mesos/
+  stop_signal: SIGKILL
   ports:
     - 5051
   links:
@@ -24,14 +27,16 @@ mesosslave:
     - /var/run/docker.sock:/var/run/docker.sock
 
 marathon:
+  stop_signal: SIGKILL
   image: mesosphere/marathon:MARATHON_VERSION
+  restart: always
   ports:
     - 8080
   links:
     - zookeeper
   environment:
     -CLUSTER: testcluster
-  command: '--zk zk://zookeeper:2181/marathon --master zk://zookeeper:2181/mesos-testcluster --env_vars_prefix MARATHON_ --mesos_authentication_principal marathon'
+  command: '--zk zk://zookeeper:2181/marathon --master zk://zookeeper:2181/mesos-testcluster --env_vars_prefix MARATHON_ --mesos_authentication_principal marathon --disable_ha'
 
 behave:
   build: dockerfiles/behave/

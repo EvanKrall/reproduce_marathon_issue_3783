@@ -4,7 +4,7 @@ import time
 
 
 def wait_for_marathon(context):
-    for _ in xrange(30):
+    for _ in xrange(60):
         try:
             context.client.ping()
         except marathon.exceptions.MarathonError:
@@ -68,11 +68,13 @@ def wait_for_one_instance_to_start(context):
 
 @when('we cause a leadership failover')
 def cause_a_leadership_failover(context):
+    wait_for_marathon(context)
     context.client.delete_leader()
 
 
 @then('marathon should not kill anything')
 def marathon_should_not_kill_anything(context):
+    wait_for_marathon(context)
     app = context.client.get_app('app-id', embed_tasks=True)
     # Check for a little while, in case the effect is delayed.
     for _ in xrange(10):
